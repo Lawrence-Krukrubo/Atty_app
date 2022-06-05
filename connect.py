@@ -5,6 +5,15 @@ from mysql.connector import Error
 import time
 
 db_name = 'dand'
+connection = mysql.connector.connect(host='localhost',
+                                         database=db_name,
+                                         user= 'danam',
+                                         password= 'roots')
+
+cursor = connection.cursor()
+cursor.execute("select database();")
+record = cursor.fetchone()
+print("You're connected to database: ", record)
 
 # Initialize connection.
 # Uses st.experimental_singleton to only run once.
@@ -21,22 +30,22 @@ db_name = 'dand'
 # record = cursor.fetchone()
 # print("You're connected to database: ", record)
 
-try:
-    connection = mysql.connector.connect(host='localhost',
-                                         database=db_name,
-                                         user= 'danam',
-                                         password= 'roots')
-    if connection.is_connected():
-        db_Info = connection.get_server_info()
-        print("Connected to MySQL Server version ", db_Info)
-        cursor = connection.cursor()
-        cursor.execute("select database();")
-        record = cursor.fetchone()
-        print("You're connected to database: ", record)
-
-except Error as e:
-    print("Error while connecting to MySQL", e)
-
+# try:
+#     connection = mysql.connector.connect(host='localhost',
+#                                          database=db_name,
+#                                          user= 'danam',
+#                                          password= 'roots')
+#     if connection.is_connected():
+#         db_Info = connection.get_server_info()
+#         print("Connected to MySQL Server version ", db_Info)
+#         cursor = connection.cursor()
+#         cursor.execute("select database();")
+#         record = cursor.fetchone()
+#         print("You're connected to database: ", record)
+#
+# except Error as e:
+#     print("Error while connecting to MySQL", e)
+#
 
 def query_to_df(query):
     """This method converts the result
