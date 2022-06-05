@@ -1,15 +1,31 @@
 import pandas as pd
 import mysql
+import streamlit as st
 from mysql.connector import Error
 import time
 
 db_name = 'dand'
 
+# Initialize connection.
+# Uses st.experimental_singleton to only run once.
+
+
+# @st.experimental_singleton
+# def init_connection():
+#     return mysql.connector.connect(**st.secrets["mysql"])
+#
+#
+# connection = init_connection()
+# cursor = connection.cursor()
+# cursor.execute("select database();")
+# record = cursor.fetchone()
+# print("You're connected to database: ", record)
+
 try:
     connection = mysql.connector.connect(host='localhost',
                                          database=db_name,
-                                         user=input('Enter UserName:'),
-                                         password=input('Enter Password:'))
+                                         user= 'danam',
+                                         password= 'roots')
     if connection.is_connected():
         db_Info = connection.get_server_info()
         print("Connected to MySQL Server version ", db_Info)
