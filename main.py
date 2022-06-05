@@ -18,7 +18,7 @@ import time
 
 
 # db_name = 'dand'
-connection = mysql.connector.connect(**st.secrets.sql)
+connection = mysql.connector.connect(**st.secrets["mysql"])
 # connection = mysql.connector.connect(host='localhost',
 #                                      database=st.secrets["db"],
 #                                      user=st.secrets["db_username"],
