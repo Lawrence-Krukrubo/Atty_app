@@ -10,18 +10,18 @@ import time
 # def init_connection():
 #     return mysql.connector.connect(**st.secrets["mysql"])
 #
-#
 # connection = init_connection()
 # cursor = connection.cursor()
 # cursor.execute("select database();")
 # record = cursor.fetchone()
 # print("You're connected to database: ", record)
 
-db_name = 'dand'
-connection = mysql.connector.connect(host='localhost',
-                                         database=db_name,
-                                         user= 'danam',
-                                         password= 'roots')
+
+# db_name = 'dand'
+connection = mysql.connector.connect(database=st.secrets["db"],
+                                     user=st.secrets["db_username"],
+                                     password=st.secrets["db_password"])
+
 
 cursor = connection.cursor()
 cursor.execute("select database();")
