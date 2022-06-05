@@ -18,11 +18,12 @@ import time
 
 
 # db_name = 'dand'
-connection = mysql.connector.connect(host='localhost',
-                                     database=st.secrets["db"],
-                                     user=st.secrets["db_username"],
-                                     password=st.secrets["db_password"])
-
+connection = mysql.connector.connect(**st.secrets.sql)
+# connection = mysql.connector.connect(host='localhost',
+#                                      database=st.secrets["db"],
+#                                      user=st.secrets["db_username"],
+#                                      password=st.secrets["db_password"])
+#
 
 cursor = connection.cursor()
 cursor.execute("select database();")
