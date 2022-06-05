@@ -6,27 +6,27 @@ import pandas as pd
 import time
 
 
-@st.experimental_singleton
-def init_connection():
-    return mysql.connector.connect(**st.secrets["mysql"])
-
-
-connection = init_connection()
-cursor = connection.cursor()
-cursor.execute("select database();")
-record = cursor.fetchone()
-print("You're connected to database: ", record)
-
-# db_name = 'dand'
-# connection = mysql.connector.connect(host='localhost',
-#                                          database=db_name,
-#                                          user= 'danam',
-#                                          password= 'roots')
+# @st.experimental_singleton
+# def init_connection():
+#     return mysql.connector.connect(**st.secrets["mysql"])
 #
+#
+# connection = init_connection()
 # cursor = connection.cursor()
 # cursor.execute("select database();")
 # record = cursor.fetchone()
 # print("You're connected to database: ", record)
+
+db_name = 'dand'
+connection = mysql.connector.connect(host='localhost',
+                                         database=db_name,
+                                         user= 'danam',
+                                         password= 'roots')
+
+cursor = connection.cursor()
+cursor.execute("select database();")
+record = cursor.fetchone()
+print("You're connected to database: ", record)
 
 
 def query_to_df(query):
