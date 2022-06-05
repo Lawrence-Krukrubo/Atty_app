@@ -81,26 +81,27 @@ def get_names():
             first, last = data.iat[ind, 0], data.iat[ind, 1]
             return first, last
         except ValueError:
-            pass
+            return None, None
 
 
 def confirm_name():
-    try:
-        x, y = get_names()
-        st.write(f'Your Udacity Name Is: {x} {y}')
-    except:
+    x, y = get_names()
+    if not x:
         st.write('Your Email is Incorrect! Try again carefully...')
+    else:
+        st.write(f'Your Udacity Name Is: {x} {y}')
 
 
 def submit():
-    try:
+    first, last = get_names()
+    if first:
         q2 = f'UPDATE {new_table} SET status = 1 WHERE email = "{mail}";'
         cursor.execute(q2)
         connection.commit()
         now = datetime.now()
         now = now.strftime("%H:%M:%S")
         st.write(f'Attendance Submitted! UK-Time: {now}')
-    except Exception as e:
+    else:
         st.write('No Submission!: Confirm Udacity Email or Contact Session Lead.')
 
 # if st.checkbox('Show Main Data'):
