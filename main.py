@@ -63,15 +63,17 @@ data = query_to_df('SELECT * FROM students;')
 today = str(date.today())[-1]
 new_table = f'stud_{today}'
 
-q1 = f'CREATE TABLE IF NOT EXISTS {new_table} SELECT * FROM students;'
-
-try:
-    cursor.execute(q1)
-except Exception as e:
-    st.write(e)
-
 # Get students email
 mail = st.text_input("Write Your Udacity Email").lower().strip()
+
+
+def create_new_table(table=new_table):
+    q1 = f'CREATE TABLE IF NOT EXISTS {table} SELECT * FROM students;'
+
+    try:
+        cursor.execute(q1)
+    except Exception as e:
+        st.write(e)
 
 
 def get_names():
@@ -94,7 +96,9 @@ def confirm_name():
 
 def submit():
     first, last = get_names()
+
     if first:
+        create_new_table()
         q2 = f'UPDATE {new_table} SET status = 1 WHERE email = "{mail}";'
         cursor.execute(q2)
         connection.commit()
