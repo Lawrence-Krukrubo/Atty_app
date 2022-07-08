@@ -34,7 +34,7 @@ cursor.execute('CREATE DATABASE IF NOT EXISTS alxt')
 cursor.execute('USE alxt')
 cursor.execute("select database();")
 record = cursor.fetchone()
-print("You're connected to database: ", record)
+st.write("You're connected to database: ", record)
 
 
 def query_to_df(query):
@@ -131,7 +131,6 @@ def submit():
 # if st.checkbox('Show Main Data'):
 #     st.subheader('Main Data')
 #     st.write(data)
-
 
 if st.button('Submit Attendance'):
     confirm_name()
