@@ -16,7 +16,17 @@ import time
 # record = cursor.fetchone()
 # print("You're connected to database: ", record)
 
-connection = mysql.connector.connect(**st.secrets["mysql"])
+config = {
+    'user': 'root',
+    'password': 'roots',
+    'host': '34.133.227.55',
+    'ssl_ca': '.streamlit/server-ca.pem',
+    'ssl_cert': '.streamlit/client-cert.pem',
+    'ssl_key': '.streamlit/client-key.pem'
+}
+
+# connection = mysql.connector.connect(**st.secrets["mysql"])
+connection = mysql.connector.connect(**config)
 
 cursor = connection.cursor()
 cursor.execute('CREATE DATABASE IF NOT EXISTS alxt')

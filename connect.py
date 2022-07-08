@@ -1,13 +1,12 @@
 import pandas as pd
 import mysql
-import streamlit as st
 from mysql.connector import Error
 import time
 
 db_name = 'dand'
 connection = mysql.connector.connect(host='localhost',
                                          database=db_name,
-                                         user= 'danam',
+                                         user='danam',
                                          password= 'roots')
 
 cursor = connection.cursor()
