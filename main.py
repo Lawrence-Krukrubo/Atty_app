@@ -103,7 +103,7 @@ def get_names():
             first, last = data.iat[ind, 0], data.iat[ind, 1]
             return first, last
         except ValueError:
-            return None, None
+            return False, False
 
 
 def confirm_name():
@@ -131,6 +131,7 @@ def submit():
 # if st.checkbox('Show Main Data'):
 #     st.subheader('Main Data')
 #     st.write(data)
+
 
 if st.button('Submit Attendance'):
     confirm_name()
