@@ -28,6 +28,7 @@ connection = mysql.connector.connect(**config)
 
 cursor = connection.cursor()
 cursor.execute('CREATE DATABASE IF NOT EXISTS alxt')
+
 # select database
 cursor.execute('USE alxt')
 cursor.execute("select database();")
@@ -75,7 +76,6 @@ st.subheader('Session Lead: Lawrence Krukrubo')
 
 # Load the data and receive email input
 data = query_to_df('SELECT * FROM students;')
-st.write(data.shape)
 today = str(date.today())[-5:]
 new_table = f'att_{today}'
 
