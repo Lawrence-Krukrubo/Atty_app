@@ -3,8 +3,6 @@ from datetime import date, datetime
 import mysql
 from mysql.connector import Error
 import pandas as pd
-import time
-
 
 # @st.experimental_singleton
 # def init_connection():
@@ -42,8 +40,6 @@ def query_to_df(query):
         of a SQL query to a DataFrame.
     @param query: Is a string of valid SQL syntax
     """
-
-    st = time.time()
     # Assert Every Query ends with a semi-colon
     try:
         assert query.endswith(';')
@@ -71,7 +67,6 @@ def query_to_df(query):
             df = pd.concat([df, x], ignore_index=True)
         else:
             df = pd.DataFrame(data)
-    print(f'Query ran for {time.time() - st} secs!')
     return df
 
 
@@ -80,6 +75,7 @@ st.subheader('Session Lead: Lawrence Krukrubo')
 
 # Load the data and receive email input
 data = query_to_df('SELECT * FROM students;')
+st.write(data.shape)
 today = str(date.today())[-5:]
 new_table = f'att_{today}'
 
