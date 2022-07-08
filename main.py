@@ -16,16 +16,12 @@ import time
 # record = cursor.fetchone()
 # print("You're connected to database: ", record)
 
-
-# db_name = 'dand'
 connection = mysql.connector.connect(**st.secrets["mysql"])
-# connection = mysql.connector.connect(host='localhost',
-#                                      database=st.secrets["db"],
-#                                      user=st.secrets["db_username"],
-#                                      password=st.secrets["db_password"])
-#
 
 cursor = connection.cursor()
+cursor.execute('CREATE DATABASE IF NOT EXISTS alxt')
+# select database
+cursor.execute('USE alxt')
 cursor.execute("select database();")
 record = cursor.fetchone()
 print("You're connected to database: ", record)
@@ -74,8 +70,8 @@ st.subheader('Session Lead: Lawrence Krukrubo')
 
 # Load the data and receive email input
 data = query_to_df('SELECT * FROM students;')
-today = str(date.today())[-1]
-new_table = f'stud_{today}'
+today = str(date.today())[-5:]
+new_table = f'att_{today}'
 
 # Get students email
 mail = st.text_input("Write Your Udacity Email").lower().strip()
