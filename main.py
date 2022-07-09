@@ -88,6 +88,7 @@ def create_new_table(table=new_table):
 
     try:
         cursor.execute(q1)
+        connection.commit()
     except Exception as e:
         st.write(e)
 
