@@ -29,11 +29,8 @@ connection = mysql.connector.connect(**config)
 cursor = connection.cursor()
 cursor.execute('CREATE DATABASE IF NOT EXISTS alxt')
 
-# select database
+# select alxt database
 cursor.execute('USE alxt')
-cursor.execute("select database();")
-record = cursor.fetchone()
-st.write("You're connected to database: ", record)
 
 
 def query_to_df(query):
