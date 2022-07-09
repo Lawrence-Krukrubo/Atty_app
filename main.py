@@ -76,7 +76,7 @@ st.subheader('Session Lead: Lawrence Krukrubo')
 
 # Load the data and receive email input
 data = query_to_df('SELECT * FROM students;')
-today = str(date.today())[-5:]
+today = str(date.today())[-5:].replace('-', '_')
 new_table = f'att_{today}'
 
 # Get students email
