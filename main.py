@@ -90,6 +90,20 @@ def create_new_table(table=new_table):
         st.write(e)
 
 
+def alter_table(new_col, table=new_table):
+    q2 = f'ALTER TABLE {table} ADD {new_col} VARCHAR(6) NOT NULL;'
+    q3 = f'SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = "{table}";'
+
+    cols = query_to_df(q3)
+    cols = list(cols.COLUMN_NAME)
+
+    if new_col not in cols:
+        cursor.execute(q2)
+        connection.commit()
+    else:
+        pass
+
+
 def get_names():
     if len(mail) > 3:
         try:
@@ -110,14 +124,23 @@ def confirm_name():
 
 def submit():
     first, last = get_names()
+    new_col = 'time'
 
     if first:
+        now = datetime.now()
+        now = now.strftime("%H:%M")
+        # Create new table if not exists
         create_new_table()
+        # Create new col if not exists
+        alter_table(new_col)
+        # Update the new table
         q2 = f'UPDATE {new_table} SET status = 1 WHERE email = "{mail}";'
+        q3 = f'UPDATE {new_table} SET time = "{now}" WHERE email = "{mail}";'
         cursor.execute(q2)
         connection.commit()
-        now = datetime.now()
-        now = now.strftime("%H:%M:%S")
+        cursor.execute(q3)
+        connection.commit()
+
         st.write(f'Attendance Submitted! UK-Time: {now}')
     else:
         st.write('No Submission!: Confirm Udacity Email or Contact Session Lead.')
